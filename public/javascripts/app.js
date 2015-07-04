@@ -16,13 +16,19 @@ var createTable = function(rows, columns) {
   return rootEl;
 }
 
-$('table').html(createTable(15, 8));
+$('table').html(createTable(21, 17));
 
 
-// Event listeners
+// Pretty colors and unicorns
 document.oncontextmenu = function() {return false;};
 
-var enabled = false;
+var enabled;
+
+var colorCell = function(cell) {
+  var color = $('input[type=color]').val();
+  $(cell).css({background: color});
+}
+
 $('td').on('mousedown', function(e) {
   enabled = true;
   if(e.button == 2) {
@@ -35,7 +41,11 @@ $('td').on('mousedown', function(e) {
 $('td').on('mouseup', function(e) { enabled = false; });
 
 $('td').on('mouseover', function(e) {
-  if (enabled) {
-    $(e.currentTarget).css({background: $('input[type=color]').val()});
-  };
+  if(e.button == 2) {
+    $(e.currentTarget).removeAttr('style');
+  } else {
+    if (enabled) colorCell($(e.currentTarget));
+  }
 });
+
+$('td').on('click', function(e) { colorCell($(e.currentTarget)); });
