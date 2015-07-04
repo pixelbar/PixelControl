@@ -8,8 +8,6 @@
 
 ### Getting started
 
-`make install`
-
-`make watch`
-
-`make server`
+* `make install`
+* `make watch`
+* `make server`
